@@ -28,6 +28,7 @@ class KeyFeatureDetector():
             self._corners = cv.approxPolyDP(contour, 0.001 * peri, True)
             self._image = cv.drawContours(self._image, [self._corners], 0, (0,255,0), 3)
             
+            # Detect Angle Magnitude
             for i in range(0,self._corners.shape[0]):
 
                 vA = self._corners[i] - self._corners[(i-1)%self._corners.shape[0]]
@@ -50,7 +51,7 @@ class KeyFeatureDetector():
             cv.destroyAllWindows
 
 if __name__ == "__main__":
-    Detector = KeyFeatureDetector('shapes/square.png')
+    Detector = KeyFeatureDetector('shapes/segitiga_tumpul.png')
     Detector.readFile()
     Detector.detectCorner()
     Detector.showImage()

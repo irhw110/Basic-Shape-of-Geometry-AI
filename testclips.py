@@ -2,19 +2,23 @@ import clips
 
 env = clips.Environment()
 
-class_string = """
-(defclass MyClass (is-a USER)
-  (slot One)
-  (slot Two))
-"""
-handler_string = """
-(defmessage-handler MyClass handler ()
-  (+ ?self:One ?self:Two))
-"""
-env.build(class_string)
-env.build(handler_string)
+env.load('test.clp')
+env.assert_string('(jumlahsudut 3)')
+env.assert_string('(jumlahsudutsama 2)')
+env.assert_string('(jumlahsudutsiku 1)')
 
-instance = env.make_instance('(instance-name of MyClass (One 1) (Two 2))')
-assert instance['One'] == 1
-assert instance['Two'] == 2
-instance.send('handler')
+
+# print(env.eval('(assert (ayah "z"))'))
+env.eval('(run)')
+
+
+    
+# print(env.run())
+
+for fact in env.facts():
+    print(str(fact) == "(samakaki)")
+
+
+
+# for activation in env.activations():
+#     print(activation.name)

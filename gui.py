@@ -1,22 +1,20 @@
-from Tkinter import *
-import tkFileDialog
+from tkinter import ttk,Frame,Tk,Label,Button,END,scrolledtext,filedialog
 from PIL import Image, ImageTk
-import ScrolledText
 import logging
-import ttk
+
 
 class Application(Frame):
     
     # Get image file
     def getImageFile(self):
         # Open browse file window
-        file = tkFileDialog.askopenfile(parent=root,mode='rb',title='Choose a file')
+        file = filedialog.askopenfile(parent=root,mode='rb',title='Choose a file')
         if file != None:
             data = file.read()
             getphoto = Image.open(file)
             getphoto = getphoto.resize((250, 250), Image.ANTIALIAS) 
             file.close()
-            print "I got %d bytes from this file." % len(data)
+            print("I got %d bytes from this file." % len(data))
             self.displayImage(getphoto)
 
     # Update chosen image on image widget
@@ -57,17 +55,17 @@ class Application(Frame):
 
         # Set up scrolled text
         Label(root,text="Detection Result").grid(row=10, column=0)
-        st = ScrolledText.ScrolledText(root, state='normal',width=30,height=10)
+        st = scrolledtext.ScrolledText(root, state='normal',width=30,height=10)
         st.configure(font='TkFixedFont')
         st.grid(row=11, column=0,padx=(3, 3),pady=(0,5))
 
         Label(root,text="Matched Facts").grid(row=10, column=1)
-        wt = ScrolledText.ScrolledText(root, state='normal',width=30,height=10)
+        wt = scrolledtext.ScrolledText(root, state='normal',width=30,height=10)
         wt.configure(font='TkFixedFont')
         wt.grid(row=11, column=1,padx=(3, 3),pady=(0,5))
 
         Label(root,text="Hit Rules").grid(row=10, column=2)
-        qt = ScrolledText.ScrolledText(root, state='normal',width=30,height=10)
+        qt = scrolledtext.ScrolledText(root, state='normal',width=30,height=10)
         qt.configure(font='TkFixedFont')
         qt.grid(row=11, column=2,padx=(3, 3),pady=(0,5))
 
@@ -113,7 +111,7 @@ class TextHandler(logging.Handler):
         self.text.after(0, append)       
 
 root = Tk(className='KBS Shape Detection')
-root.geometry("800x605")
+root.geometry("2000x1000")
 root.resizable(0, 0)
 
  

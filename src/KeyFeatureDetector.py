@@ -12,6 +12,8 @@ class KeyFeatureDetector():
         self._vertices = np.array(list())
         self._facts = []
 
+    def _reset(self):
+        self.__init__()
 
     def _read_file(self,file):
         self._image = cv.imread(file)

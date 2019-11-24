@@ -9,6 +9,9 @@ class ShapeDetector():
         for fact in facts:
             self._clips.assert_string(fact)
 
+    def _reload_clp(self,file):
+        self._clips.load(file)
+
     def _run(self):
         self._clips.run()
 

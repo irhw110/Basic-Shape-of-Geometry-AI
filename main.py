@@ -3,10 +3,10 @@ from src.ShapeDetector import ShapeDetector
 
 
 if __name__ == "__main__":
-    KFDetector = KeyFeatureDetector('shapes/segitiga_siku2.png')
+    KFDetector = KeyFeatureDetector()
     SDetector = ShapeDetector('test.clp')
 
-    KFDetector._read_file()
+    KFDetector._read_file('shapes/segitiga_siku2.png')
     KFDetector._detect_corner()
     KFDetector._find_vertices()
     facts = KFDetector._extract_fact()

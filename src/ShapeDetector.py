@@ -28,3 +28,6 @@ class ShapeDetector():
 
     def _get_facts(self):
         return self._clips.facts()
+
+    get _hit_rule(self):
+        return self._clips.activations()

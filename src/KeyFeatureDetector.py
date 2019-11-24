@@ -4,8 +4,7 @@ import math
 
 class KeyFeatureDetector():
 
-    def __init__(self,file):
-        self._file = file
+    def __init__(self):
         self._image = None
         self._image_gray = None
         self._corners = np.array(list())
@@ -14,8 +13,8 @@ class KeyFeatureDetector():
         self._facts = []
 
 
-    def _read_file(self):
-        self._image = cv.imread(self._file)
+    def _read_file(self,file):
+        self._image = cv.imread(file)
         self._image_gray = cv.cvtColor(self._image, cv.COLOR_BGR2GRAY)
 
     def _detect_corner(self):

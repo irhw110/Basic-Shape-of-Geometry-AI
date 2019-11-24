@@ -20,6 +20,9 @@ class KeyFeatureDetector():
         self._image_gray = cv.cvtColor(self._image, cv.COLOR_BGR2GRAY)
 
     def _detect_corner(self):
+        self._corners = np.array(list())
+        self._angle = np.array(list())
+        self._vertices = np.array(list())
         if(True):
             ret,thresh = cv.threshold(self._image_gray,150,255,cv.THRESH_BINARY)
             contours, hierarchy = cv.findContours(thresh,cv.RETR_TREE,cv.CHAIN_APPROX_NONE)
@@ -70,8 +73,12 @@ class KeyFeatureDetector():
         cv.waitKey(0)
         cv.destroyAllWindows
 
+    def _get_facts(self):
+        return self._facts
+
     def _extract_fact(self):
 
+        self._fact() = []
         # Jumlah Sudut
         self._facts.append("(jumlahsudut " + str(len(self._corners)) + ")")
 

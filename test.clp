@@ -178,7 +178,7 @@
 ;;****************
 
 (defrule segilimaberaturan
-    (bentuk segiempat)
+    (bentuk segilima)
     (jumlahsisisama 5)
     =>
     (assert (segilima_beraturan))
@@ -186,7 +186,7 @@
 )
 
 (defrule segilimatidakberaturan
-    (bentuk segiempat)
+    (bentuk segilima)
     =>
     (assert (segilima_tidak_beraturan))
     (halt)
@@ -198,7 +198,7 @@
 
 (defrule segienamberaturan
     (bentuk segiempat)
-    (jumlahsisisama 5)
+    (jumlahsisisama 6)
     =>
     (assert (segienam_beraturan))
     (halt)

@@ -16,7 +16,7 @@ env.eval('(run)')
 # print(env.run())
 
 for fact in env.facts():
-    print(str(fact) == "(samakaki)")
+    print(str(fact) == "(segitiga_siku_samakaki)")
 
 
 

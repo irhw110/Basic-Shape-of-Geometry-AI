@@ -10,12 +10,15 @@ class KeyFeatureDetector():
         self._image_gray = None
         self._corners = np.array(list())
         self._angle = np.array(list())
+        self._vertices = np.array(list())
+        self._facts = []
 
-    def readFile(self):
+
+    def _read_file(self):
         self._image = cv.imread(self._file)
         self._image_gray = cv.cvtColor(self._image, cv.COLOR_BGR2GRAY)
 
-    def detectCorner(self):
+    def _detect_corner(self):
         if(True):
             ret,thresh = cv.threshold(self._image_gray,150,255,cv.THRESH_BINARY)
             contours, hierarchy = cv.findContours(thresh,cv.RETR_TREE,cv.CHAIN_APPROX_NONE)
@@ -41,17 +44,80 @@ class KeyFeatureDetector():
                 angleMag = math.degrees(np.arccos(dotProduct/(magVA*magVB)))
                 self._angle = np.append(self._angle,angleMag)
 
-            
+    def _find_vertices(self):
+        for i in range(0,self._corners.shape[0]):
+            v = self._corners[i] - self._corners[(i+1)%self._corners.shape[0]]
+
+            magV = np.linalg.norm(v[0])
+
+            self._vertices = np.append(self._vertices,magV)
+
+    def _get_corners(self):
+        return self._corners
     
-    def showImage(self):
-            print(self._corners)
-            print(self._angle)
-            cv.imshow('image', self._image)
-            cv.waitKey(0)
-            cv.destroyAllWindows
+    def _get_angles(self):
+        return self._angle
+    
+    def _show_image(self):
+        print(self._corners)
+        print(self._angle)
+        print(self._vertices)
+        cv.imshow('image', self._image)
+        cv.waitKey(0)
+        cv.destroyAllWindows
+
+    def _extract_fact(self):
+
+        # Jumlah Sudut
+        self._facts.append("(jumlahsudut " + str(len(self._corners)) + ")")
+
+        # Jumlah Sudut Sama,Jumlah siku, Jumlah Tumpul, Jumlah Lancip
+        jumlah_sudut_sama_terbanyak = 0
+        jumlah_sudut_sama = 0
+        jumlah_siku = 0
+        jumlah_tumpul = 0
+        jumlah_lancip = 0
+        for sudut in self._angle:
+            jumlah_sudut_sama = 0
+            for x in self._angle:
+                if x == sudut:
+                    jumlah_sudut_sama = jumlah_sudut_sama + 1
+            
+            if jumlah_sudut_sama_terbanyak < jumlah_sudut_sama:
+                jumlah_sudut_sama_terbanyak = jumlah_sudut_sama
+
+            if sudut == 90:
+                jumlah_siku = jumlah_siku + 1
+            elif sudut < 90:
+                jumlah_lancip = jumlah_lancip + 1
+            else :
+                jumlah_tumpul = jumlah_tumpul + 1
+        
+        self._facts.append("(jumlahsudutsama " + str(jumlah_sudut_sama_terbanyak) + ")")
+        self._facts.append("(jumlahsudutsiku " + str(jumlah_siku) + ")")
+        self._facts.append("(jumlahsudutlancip " + str(jumlah_lancip) + ")")
+        self._facts.append("(jumlahsuduttumpul " + str(jumlah_tumpul) + ")")
+
+        # Jumlah Sisi Sama
+        jumlah_sisi_sama = 0
+        jumlah_sisi_sama_terbanyak = 0
+        for sisi in self._vertices:
+            jumlah_sisi_sama = 0
+            for x in self._vertices:
+                if x == sisi:
+                    jumlah_sisi_sama = jumlah_sisi_sama + 1
+            
+            if jumlah_sisi_sama_terbanyak < jumlah_sisi_sama:
+                jumlah_sisi_sama_terbanyak = jumlah_sisi_sama
+        
+        self._facts.append("(jumlahsisisama " + str(jumlah_sisi_sama_terbanyak) + ")")
+
+        print(self._facts)
+        return self._facts
+
 
 if __name__ == "__main__":
     Detector = KeyFeatureDetector('shapes/segitiga_tumpul.png')
-    Detector.readFile()
-    Detector.detectCorner()
-    Detector.showImage()
+    Detector._read_file()
+    Detector._detect_corner()
+    Detector._show_image()

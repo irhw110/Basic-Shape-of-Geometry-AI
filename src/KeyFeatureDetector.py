@@ -78,7 +78,7 @@ class KeyFeatureDetector():
 
     def _extract_fact(self):
 
-        self._fact() = []
+        self._facts = []
         # Jumlah Sudut
         self._facts.append("(jumlahsudut " + str(len(self._corners)) + ")")
 

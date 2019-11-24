@@ -1,9 +1,8 @@
 import clips
 
 class ShapeDetector():
-    def __init__(self,file):
+    def __init__(self):
         self._clips = clips.Environment()
-        self._clips.load(file)
 
     def _add_facts(self,facts):
         for fact in facts:
@@ -29,5 +28,5 @@ class ShapeDetector():
     def _get_facts(self):
         return self._clips.facts()
 
-    get _hit_rule(self):
+    def _get_hit_rule(self):
         return self._clips.activations()

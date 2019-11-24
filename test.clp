@@ -104,14 +104,6 @@
 ;;* Segiempat    *
 ;;****************
 
-(defrule segiempatberaturan
-    (bentuk segiempat)
-    (jumlahsudutsiku 4)
-    (jumlahsisisama 4)
-    =>
-    (assert (segiempat_beraturan))
-    (halt)
-)
 
 (defrule persegi
     (bentuk segiempat)
@@ -197,7 +189,7 @@
 ;;****************
 
 (defrule segienamberaturan
-    (bentuk segiempat)
+    (bentuk segienam)
     (jumlahsisisama 6)
     =>
     (assert (segienam_beraturan))
@@ -205,7 +197,7 @@
 )
 
 (defrule segienamtidakberaturan
-    (bentuk segiempat)
+    (bentuk segienam)
     =>
     (assert (segienam_tidak_beraturan))
     (halt)

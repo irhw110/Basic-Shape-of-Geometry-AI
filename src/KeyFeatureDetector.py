@@ -56,6 +56,9 @@ class KeyFeatureDetector():
     
     def _get_angles(self):
         return self._angle
+
+    def _get_image(self):
+        return self._image
     
     def _show_image(self):
         print(self._corners)
